@@ -22,8 +22,8 @@
     <Compile Update="BoxView_Page.xaml.cs">
       <DependentUpon>BoxView_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Clicker.xaml.cs">
-      <DependentUpon>Clicker.xaml</DependentUpon>
+    <Compile Update="startpage1.xaml.cs">
+      <DependentUpon>startpage1.xaml</DependentUpon>
     </Compile>
     <Compile Update="TimePage.xaml.cs">
       <DependentUpon>TimePage.xaml</DependentUpon>
@@ -31,13 +31,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="DateTimePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Entry_Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="BoxView_Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Clicker.xaml">
+    <EmbeddedResource Update="RGBsliderPAge.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="startpage1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StepperSliderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="TimePage.xaml">

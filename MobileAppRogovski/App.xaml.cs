@@ -10,7 +10,7 @@ namespace MobileAppRogovski
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new StartPage());
+            MainPage = new NavigationPage(new startpage1());
         }
 
         protected override void OnStart()
