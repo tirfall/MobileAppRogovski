@@ -12,8 +12,8 @@ namespace MobileAppRogovski
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class startpage1 : ContentPage
     {
-        List<ContentPage> pages = new List<ContentPage>() { new Entry_Page(), new TimePage(), new BoxView_Page(), new DateTimePage(), new StepperSliderPage(), new RGBsliderPAge() };
-        List<string> texts = new List<string>() { "Ava entry leht", "Ava timer leht", "Ava boxview leht", "Ava datetime leht", "Ava stepperslider leht", "Ava RGB leht" };
+        List<ContentPage> pages = new List<ContentPage>() { new Entry_Page(), new TimePage(), new BoxView_Page(), new DateTimePage(), new StepperSliderPage(), new RGBsliderPAge(), new Frame_Page(), new Lumememm() };
+        List<string> texts = new List<string>() { "Ava entry leht", "Ava timer leht", "Ava boxview leht", "Ava datetime leht", "Ava stepperslider leht", "Ava RGB leht", "Ava Frame leht", "Ava Lumememm leht" };
         StackLayout st;
         public startpage1()
         {
