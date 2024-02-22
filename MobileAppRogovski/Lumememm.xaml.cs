@@ -13,12 +13,11 @@ namespace MobileAppRogovski
     public partial class Lumememm : ContentPage
     {
         BoxView bucket, head, body;
-        Button IsVis, colorButton;
-        Slider meltingSlider;
+        Button IsVis, colorButton, meltBut, resetBut;
 
         public Lumememm()
         {
-            BackgroundColor = Color.LightGray;
+            BackgroundColor = Color.MintCream;
 
             // Initialize BoxViews
             bucket = new BoxView
@@ -50,29 +49,39 @@ namespace MobileAppRogovski
             {
                 BackgroundColor = Color.Blue,
                 WidthRequest = 100,
-                HeightRequest = 50,
+                HeightRequest = 60,
                 Text = "Peida",
-                HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 20, 0, 0)
+                HorizontalOptions = LayoutOptions.Center
             };
             IsVis.Clicked += IsVis_Clicked;
 
             colorButton = new Button
             {
+                BackgroundColor = Color.Green,
+                WidthRequest = 100,
+                HeightRequest = 60,
                 Text = "Random Color",
-                HorizontalOptions = LayoutOptions.Center,
-                Margin = new Thickness(0, 20, 0, 0)
+                HorizontalOptions = LayoutOptions.Center
             };
             colorButton.Clicked += ColorButton_Clicked;
-            meltingSlider = new Slider
+            meltBut = new Button
             {
-                Minimum = 0,
-                Maximum = 1,
-                Value = 1, // Initial value
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness(20, 20, 20, 0)
+                BackgroundColor = Color.Red,
+                WidthRequest = 100,
+                HeightRequest = 60,
+                Text = "Melt lumememm",
+                HorizontalOptions = LayoutOptions.Center
             };
-            meltingSlider.ValueChanged += MeltingSlider_ValueChanged;
+            meltBut.Clicked += meltBut_Clicked;
+            resetBut = new Button
+            {
+                BackgroundColor = Color.Blue,
+                WidthRequest = 100,
+                HeightRequest = 60,
+                Text = "reset",
+                HorizontalOptions = LayoutOptions.Center
+            };
+            resetBut.Clicked += resetBut_Clicked;
 
             // Initialize AbsoluteLayout
             AbsoluteLayout al = new AbsoluteLayout();
@@ -84,23 +93,64 @@ namespace MobileAppRogovski
             al.Children.Add(bucket);
             al.Children.Add(IsVis);
             al.Children.Add(colorButton);
-            al.Children.Add(meltingSlider);
+            al.Children.Add(meltBut);
+            al.Children.Add(resetBut);
             // Set positions of BoxViews within the AbsoluteLayout
 
             AbsoluteLayout.SetLayoutBounds(head, new Rectangle(150, 225, head.Width, head.Height));
             AbsoluteLayout.SetLayoutBounds(body, new Rectangle(125, 300, body.Width, body.Height));
             AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, 150, bucket.Width, bucket.Height));
-            AbsoluteLayout.SetLayoutBounds(IsVis, new Rectangle(0, 650, IsVis.Width, IsVis.Height));
-            AbsoluteLayout.SetLayoutBounds(colorButton, new Rectangle(100, 650, colorButton.Width, colorButton.Height));
-            AbsoluteLayout.SetLayoutBounds(meltingSlider, new Rectangle(200, 650, meltingSlider.Width, meltingSlider.Height));
+            AbsoluteLayout.SetLayoutBounds(IsVis, new Rectangle(0, 10, IsVis.Width, IsVis.Height));
+            AbsoluteLayout.SetLayoutBounds(colorButton, new Rectangle(100, 10, colorButton.Width, colorButton.Height));
+            AbsoluteLayout.SetLayoutBounds(meltBut, new Rectangle(200, 10, meltBut.Width, meltBut.Height));
+            AbsoluteLayout.SetLayoutBounds(resetBut, new Rectangle(300, 10, resetBut.Width, resetBut.Height));
 
             // Set the AbsoluteLayout as the Content of the ContentPage
             Content = al;
         }
 
-        private void MeltingSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void resetBut_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (BoxView item in new BoxView[] { head, body})
+            {
+                item.Opacity = 1;
+                item.BackgroundColor = Color.White;
+            }
+            AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, 150, bucket.Width, bucket.Height));
+            bucket.BackgroundColor = Color.LightGray;
+        }
+
+        private async void meltBut_Clicked(object sender, EventArgs e)
+        {
+            for (double i = 1; i > 0.01; i -= 0.01)
+            {
+                head.Opacity = i;
+                body.Opacity = i;
+                await Task.Delay(10);
+            }
+            head.Opacity = 0;
+            body.Opacity = 0;
+            for (int i = 150; i < 500; i += 5)
+            {
+                AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, i, bucket.Width, bucket.Height));
+                await Task.Delay(1);
+            }
+            int j = 0;
+            for (int i = 500; i > 425; i -= 5)
+            {
+                j += 3;
+                AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, i, bucket.Width, bucket.Height));
+                await Task.Delay(1);
+                bucket.Rotation = j;
+            }
+            for (int i = 425; i < 500; i += 5)
+            {
+                j += 3;
+                AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, i, bucket.Width, bucket.Height));
+                await Task.Delay(1);
+                bucket.Rotation = j;
+                bucket.HeightRequest += 1;
+            }
         }
 
         private void ColorButton_Clicked(object sender, EventArgs e)
@@ -118,8 +168,8 @@ namespace MobileAppRogovski
             bucket.IsVisible = !bucket.IsVisible;
             head.IsVisible = !head.IsVisible;
             body.IsVisible = !body.IsVisible;
-            IsVis.Text = "Näita";
-            if (bucket.IsVisible) { IsVis.Text = "Peida"; }
+            IsVis.Text = bucket.IsVisible ? "Peida" : "Näita";
+            //if (bucket.IsVisible) { IsVis.Text = "Peida"; }
         }
     }
 }
