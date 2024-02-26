@@ -22,6 +22,9 @@
     <Compile Update="BoxView_Page.xaml.cs">
       <DependentUpon>BoxView_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Update="PickerPage.xaml.cs">
+      <DependentUpon>PickerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="startpage1.xaml.cs">
       <DependentUpon>startpage1.xaml</DependentUpon>
     </Compile>
@@ -47,6 +50,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Lumememm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PickerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="RGBsliderPAge.xaml">
