@@ -12,8 +12,8 @@ namespace MobileAppRogovski
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Lumememm : ContentPage
     {
-        BoxView bucket, head, body;
-        Button IsVis, colorButton, meltBut, resetBut;
+        BoxView bucket, head, body, rightArm, leftArm;
+        Button IsVis, colorButton, meltBut, resetBut, upBut, downBut, lehviBut;
 
         public Lumememm()
         {
@@ -82,12 +82,57 @@ namespace MobileAppRogovski
                 HorizontalOptions = LayoutOptions.Center
             };
             resetBut.Clicked += resetBut_Clicked;
+            leftArm = new BoxView
+            {
+                BackgroundColor = Color.Brown,
+                WidthRequest = 80,
+                HeightRequest = 10,
+                HorizontalOptions = LayoutOptions.Center,
+                Rotation = 0
+            };
+            rightArm = new BoxView
+            {
+                BackgroundColor = Color.Brown,
+                WidthRequest = 80,
+                HeightRequest = 10,
+                HorizontalOptions = LayoutOptions.Center,
+                Rotation = 0
+            };
+            lehviBut = new Button
+            {
+                BackgroundColor = Color.Blue,
+                WidthRequest = 100,
+                HeightRequest = 60,
+                Text = "lehvitama",
+                HorizontalOptions = LayoutOptions.Center
+            };
+            lehviBut.Clicked += lehviBut_Clicked;
+            upBut = new Button
+            {
+                BackgroundColor = Color.Blue,
+                WidthRequest = 100,
+                HeightRequest = 60,
+                Text = "tõsta käed",
+                HorizontalOptions = LayoutOptions.Center
+            };
+            upBut.Clicked += upBut_Clicked;
+            downBut = new Button
+            {
+                BackgroundColor = Color.Blue,
+                WidthRequest = 100,
+                HeightRequest = 60,
+                Text = "alla käed",
+                HorizontalOptions = LayoutOptions.Center
+            };
+            downBut.Clicked += downBut_Clicked;
 
             // Initialize AbsoluteLayout
             AbsoluteLayout al = new AbsoluteLayout();
 
             // Add BoxViews to AbsoluteLayout
-            
+
+            al.Children.Add(leftArm);
+            al.Children.Add(rightArm);
             al.Children.Add(head);
             al.Children.Add(body);
             al.Children.Add(bucket);
@@ -95,8 +140,14 @@ namespace MobileAppRogovski
             al.Children.Add(colorButton);
             al.Children.Add(meltBut);
             al.Children.Add(resetBut);
+            al.Children.Add(upBut);
+            al.Children.Add(downBut);
+            al.Children.Add(lehviBut);
+
             // Set positions of BoxViews within the AbsoluteLayout
 
+            AbsoluteLayout.SetLayoutBounds(leftArm, new Rectangle(70, 330, leftArm.Width, leftArm.Height));
+            AbsoluteLayout.SetLayoutBounds(rightArm, new Rectangle(250, 330, rightArm.Width, rightArm.Height));
             AbsoluteLayout.SetLayoutBounds(head, new Rectangle(150, 225, head.Width, head.Height));
             AbsoluteLayout.SetLayoutBounds(body, new Rectangle(125, 300, body.Width, body.Height));
             AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, 150, bucket.Width, bucket.Height));
@@ -104,9 +155,50 @@ namespace MobileAppRogovski
             AbsoluteLayout.SetLayoutBounds(colorButton, new Rectangle(100, 10, colorButton.Width, colorButton.Height));
             AbsoluteLayout.SetLayoutBounds(meltBut, new Rectangle(200, 10, meltBut.Width, meltBut.Height));
             AbsoluteLayout.SetLayoutBounds(resetBut, new Rectangle(300, 10, resetBut.Width, resetBut.Height));
+            AbsoluteLayout.SetLayoutBounds(upBut, new Rectangle(50, 500, upBut.Width, upBut.Height));
+            AbsoluteLayout.SetLayoutBounds(downBut, new Rectangle(150, 500, downBut.Width, downBut.Height));
+            AbsoluteLayout.SetLayoutBounds(lehviBut, new Rectangle(250, 500, lehviBut.Width, lehviBut.Height));
+
 
             // Set the AbsoluteLayout as the Content of the ContentPage
             Content = al;
+        }
+
+        private async void upBut_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                leftArm.Rotation += 1;
+                rightArm.Rotation -= 1;
+                await Task.Delay(1);
+            }
+        }
+
+        private async void downBut_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                leftArm.Rotation -= 1;
+                rightArm.Rotation += 1;
+                await Task.Delay(1);
+            }
+            
+        }
+
+        private async void lehviBut_Clicked(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                leftArm.Rotation += 1;
+                rightArm.Rotation -= 1;
+                await Task.Delay(1);
+            }
+            for (int j = 0; j < 30; j++)
+            {
+                leftArm.Rotation -= 1;
+                rightArm.Rotation += 1;
+                await Task.Delay(1);
+            }
         }
 
         private void resetBut_Clicked(object sender, EventArgs e)
@@ -168,8 +260,9 @@ namespace MobileAppRogovski
             bucket.IsVisible = !bucket.IsVisible;
             head.IsVisible = !head.IsVisible;
             body.IsVisible = !body.IsVisible;
+            leftArm.IsVisible = !leftArm.IsVisible;
+            rightArm.IsVisible = !rightArm.IsVisible;
             IsVis.Text = bucket.IsVisible ? "Peida" : "Näita";
-            //if (bucket.IsVisible) { IsVis.Text = "Peida"; }
         }
     }
 }
