@@ -19,7 +19,7 @@ namespace MobileAppRogovski
         {
             BackgroundColor = Color.MintCream;
 
-            // Initialize BoxViews
+            
             bucket = new BoxView
             {
                 BackgroundColor = Color.LightGray,
@@ -34,7 +34,7 @@ namespace MobileAppRogovski
                 WidthRequest = 100,
                 HeightRequest = 100,
                 HorizontalOptions = LayoutOptions.Center,
-                CornerRadius = 50, // Adjusted from 360 to 50 to make a semicircle
+                CornerRadius = 50,
             };
 
             body = new BoxView
@@ -43,43 +43,47 @@ namespace MobileAppRogovski
                 WidthRequest = 150,
                 HeightRequest = 150,
                 HorizontalOptions = LayoutOptions.Center,
-                CornerRadius = 75, // Adjusted from 360 to 75 to make a semicircle
+                CornerRadius = 75, 
             };
             IsVis = new Button
             {
-                BackgroundColor = Color.Blue,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "Peida",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16
             };
             IsVis.Clicked += IsVis_Clicked;
 
             colorButton = new Button
             {
-                BackgroundColor = Color.Green,
                 WidthRequest = 100,
                 HeightRequest = 60,
-                Text = "Random Color",
-                HorizontalOptions = LayoutOptions.Center
+                Text = "Random värv",
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16
             };
             colorButton.Clicked += ColorButton_Clicked;
             meltBut = new Button
             {
-                BackgroundColor = Color.Red,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "Melt lumememm",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontSize = 12,
+                FontAttributes = FontAttributes.Bold
             };
             meltBut.Clicked += meltBut_Clicked;
             resetBut = new Button
             {
-                BackgroundColor = Color.Blue,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "reset",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16
             };
             resetBut.Clicked += resetBut_Clicked;
             leftArm = new BoxView
@@ -100,51 +104,38 @@ namespace MobileAppRogovski
             };
             lehviBut = new Button
             {
-                BackgroundColor = Color.Blue,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "lehvitama",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 12
             };
             lehviBut.Clicked += lehviBut_Clicked;
             upBut = new Button
             {
-                BackgroundColor = Color.Blue,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "tõsta käed",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16
             };
             upBut.Clicked += upBut_Clicked;
             downBut = new Button
             {
-                BackgroundColor = Color.Blue,
                 WidthRequest = 100,
                 HeightRequest = 60,
                 Text = "alla käed",
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                FontSize = 16,
+                FontAttributes = FontAttributes.Bold,
             };
             downBut.Clicked += downBut_Clicked;
 
-            // Initialize AbsoluteLayout
-            AbsoluteLayout al = new AbsoluteLayout();
-
-            // Add BoxViews to AbsoluteLayout
-
-            al.Children.Add(leftArm);
-            al.Children.Add(rightArm);
-            al.Children.Add(head);
-            al.Children.Add(body);
-            al.Children.Add(bucket);
-            al.Children.Add(IsVis);
-            al.Children.Add(colorButton);
-            al.Children.Add(meltBut);
-            al.Children.Add(resetBut);
-            al.Children.Add(upBut);
-            al.Children.Add(downBut);
-            al.Children.Add(lehviBut);
-
-            // Set positions of BoxViews within the AbsoluteLayout
+            AbsoluteLayout al = new AbsoluteLayout { 
+                Children= {leftArm, rightArm,head,body,bucket,IsVis,colorButton,meltBut,resetBut,upBut,downBut,lehviBut}
+            };
 
             AbsoluteLayout.SetLayoutBounds(leftArm, new Rectangle(70, 330, leftArm.Width, leftArm.Height));
             AbsoluteLayout.SetLayoutBounds(rightArm, new Rectangle(250, 330, rightArm.Width, rightArm.Height));
@@ -155,49 +146,53 @@ namespace MobileAppRogovski
             AbsoluteLayout.SetLayoutBounds(colorButton, new Rectangle(100, 10, colorButton.Width, colorButton.Height));
             AbsoluteLayout.SetLayoutBounds(meltBut, new Rectangle(200, 10, meltBut.Width, meltBut.Height));
             AbsoluteLayout.SetLayoutBounds(resetBut, new Rectangle(300, 10, resetBut.Width, resetBut.Height));
-            AbsoluteLayout.SetLayoutBounds(upBut, new Rectangle(50, 500, upBut.Width, upBut.Height));
-            AbsoluteLayout.SetLayoutBounds(downBut, new Rectangle(150, 500, downBut.Width, downBut.Height));
-            AbsoluteLayout.SetLayoutBounds(lehviBut, new Rectangle(250, 500, lehviBut.Width, lehviBut.Height));
+            AbsoluteLayout.SetLayoutBounds(upBut, new Rectangle(50, 600, upBut.Width, upBut.Height));
+            AbsoluteLayout.SetLayoutBounds(downBut, new Rectangle(150, 600, downBut.Width, downBut.Height));
+            AbsoluteLayout.SetLayoutBounds(lehviBut, new Rectangle(250, 600, lehviBut.Width, lehviBut.Height));
 
-
-            // Set the AbsoluteLayout as the Content of the ContentPage
             Content = al;
         }
-
         private async void upBut_Clicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
+
+            if (leftArm.Rotation < 60)
             {
-                leftArm.Rotation += 1;
-                rightArm.Rotation -= 1;
-                await Task.Delay(1);
+                for (int i = 0; i < 10; i++)
+                {
+                    leftArm.Rotation += 1;
+                    rightArm.Rotation -= 1;
+                    await Task.Delay(1);
+                }
             }
         }
-
         private async void downBut_Clicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
+            if (rightArm.Rotation < 10)
             {
-                leftArm.Rotation -= 1;
-                rightArm.Rotation += 1;
-                await Task.Delay(1);
+                for (int i = 0; i < 10; i++)
+                {
+                    leftArm.Rotation -= 1;
+                    rightArm.Rotation += 1;
+                    await Task.Delay(1);
+                }
             }
-            
         }
-
         private async void lehviBut_Clicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < 30; i++)
+            if (leftArm.Rotation < 30)
             {
-                leftArm.Rotation += 1;
-                rightArm.Rotation -= 1;
-                await Task.Delay(1);
-            }
-            for (int j = 0; j < 30; j++)
-            {
-                leftArm.Rotation -= 1;
-                rightArm.Rotation += 1;
-                await Task.Delay(1);
+                for (int i = 0; i < 30; i++)
+                {
+                    leftArm.Rotation += 1;
+                    rightArm.Rotation -= 1;
+                    await Task.Delay(1);
+                }
+                for (int j = 0; j < 30; j++)
+                {
+                    leftArm.Rotation -= 1;
+                    rightArm.Rotation += 1;
+                    await Task.Delay(1);
+                }
             }
         }
 
@@ -208,6 +203,10 @@ namespace MobileAppRogovski
                 item.Opacity = 1;
                 item.BackgroundColor = Color.White;
             }
+            leftArm.Rotation = 0;
+            rightArm.Rotation = 0;
+            leftArm.Opacity = 1;
+            rightArm.Opacity = 1;
             AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, 150, bucket.Width, bucket.Height));
             bucket.BackgroundColor = Color.LightGray;
         }
@@ -218,10 +217,14 @@ namespace MobileAppRogovski
             {
                 head.Opacity = i;
                 body.Opacity = i;
+                leftArm.Opacity = i;
+                rightArm.Opacity = i;
                 await Task.Delay(10);
             }
             head.Opacity = 0;
             body.Opacity = 0;
+            leftArm.Opacity = 0;
+            rightArm.Opacity = 0;
             for (int i = 150; i < 500; i += 5)
             {
                 AbsoluteLayout.SetLayoutBounds(bucket, new Rectangle(150, i, bucket.Width, bucket.Height));
@@ -243,6 +246,7 @@ namespace MobileAppRogovski
                 bucket.Rotation = j;
                 bucket.HeightRequest += 1;
             }
+            
         }
 
         private void ColorButton_Clicked(object sender, EventArgs e)

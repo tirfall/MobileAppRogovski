@@ -72,7 +72,6 @@ namespace MobileAppRogovski
 
             Content = new StackLayout
             {
-                Padding = new Thickness(20),
                 Children =
                 {
                     redlbl,
@@ -107,23 +106,34 @@ namespace MobileAppRogovski
 
             colorBox.Color = Color.FromRgb(red, green, blue);
         }
-        private async void RandomColorButton_Clicked(object sender, EventArgs e)
+        private void RandomColorButton_Clicked(object sender, EventArgs e)
         {
-            await AnimateSlider(sldred, GetRandomValue());
-            await AnimateSlider(sldgrn, GetRandomValue());
-            await AnimateSlider(sldblue, GetRandomValue());
+            ToColor(sldred, redlbl, new Random().Next(256), "Red");
+            ToColor(sldgrn, greenlbl, new Random().Next(256), "Green");
+            ToColor(sldblue, bluelbl, new Random().Next(256), "Blue");
         }
 
-        private double GetRandomValue()
+        private void ToColor(Slider slider, Label label, int ToColor, string color)
         {
-            Random random = new Random();
-            return random.Next(0, 255);
-        }
-        private async Task AnimateSlider(Slider slider, double value)
-        {
-            
-            await slider.TranslateTo(value, 0);
-            //slider.Value = value;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                if (slider.Value > ToColor)
+                {
+                    for (; slider.Value > ToColor; slider.Value--)
+                    {
+                        label.Text = string.Format("{1} = {0}", (int)slider.Value, color);
+                        await Task.Delay(10);
+                    }
+                }
+                else
+                {
+                    for (; slider.Value < ToColor; slider.Value++)
+                    {
+                        label.Text = string.Format("{1} = {0}", (int)slider.Value, color);
+                        await Task.Delay(10);
+                    }
+                }
+            });
         }
     }
 }
