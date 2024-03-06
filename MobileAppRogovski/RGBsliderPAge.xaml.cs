@@ -17,8 +17,19 @@ namespace MobileAppRogovski
         Slider sldred, sldgrn, sldblue;
         BoxView colorBox;
         Button btn;
+        Stepper stp;
         public RGBsliderPAge()
         {
+            stp = new Stepper
+            {
+                Minimum = 0,
+                Maximum = 255,
+                Increment = 10,
+                Value = 255,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+            };
+            stp.ValueChanged += OnSliderValueChanged;
             sldred = new Slider
             {
                 Minimum = 0,
@@ -60,7 +71,7 @@ namespace MobileAppRogovski
             colorBox = new BoxView { 
                 Color = Color.Black, 
                 HorizontalOptions = LayoutOptions.FillAndExpand, 
-                VerticalOptions = LayoutOptions.FillAndExpand 
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
 
             btn = new Button
@@ -81,11 +92,14 @@ namespace MobileAppRogovski
                     bluelbl,
                     sldblue,
                     colorBox,
-                    btn
+                    btn,
+                    stp
                 }
             };
         }
+
         
+
         private void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             int red = Convert.ToInt32(sldred.Value);
@@ -104,7 +118,9 @@ namespace MobileAppRogovski
                 bluelbl.Text = String.Format("Blue = {0:X2}", (int)args.NewValue);
             }
 
-            colorBox.Color = Color.FromRgb(red, green, blue);
+            colorBox.Color = Color.FromRgba(red, green, blue, (int)stp.Value);
+            
+            
         }
         private void RandomColorButton_Clicked(object sender, EventArgs e)
         {
