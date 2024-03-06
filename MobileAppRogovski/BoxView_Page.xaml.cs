@@ -13,6 +13,8 @@ namespace MobileAppRogovski
     public partial class BoxView_Page : ContentPage
     {
         BoxView box;
+        Label lbl;
+        int mount = 1; 
         public BoxView_Page()
         {
             int r=0, g=0, b=0;
@@ -24,10 +26,19 @@ namespace MobileAppRogovski
                 HorizontalOptions=LayoutOptions.Center,
                 VerticalOptions=LayoutOptions.CenterAndExpand
             };
+            lbl = new Label
+            {
+                Text="0",
+                WidthRequest = 200,
+                HeightRequest = 200,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                FontSize=50
+            };
             TapGestureRecognizer tap = new TapGestureRecognizer();
             tap.Tapped += Tap_Tapped;
             box.GestureRecognizers.Add(tap);
-            StackLayout st = new StackLayout { Children = { box } };
+            StackLayout st = new StackLayout { Children = { box, lbl } };
             Content = st;
         }
         Random rnd;
@@ -35,6 +46,9 @@ namespace MobileAppRogovski
         {
             rnd = new Random();
             box.Color = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
+            lbl.Text = mount++.ToString();
+            box.Rotation = mount;
+
         }
 
         
