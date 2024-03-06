@@ -48,7 +48,6 @@ namespace MobileAppRogovski
             box.Color = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
             lbl.Text = mount++.ToString();
             box.Rotation = mount;
-
         }
 
         
