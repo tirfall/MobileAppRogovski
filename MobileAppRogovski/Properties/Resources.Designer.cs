@@ -93,16 +93,6 @@ namespace MobileAppRogovski.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] minus {
-            get {
-                object obj = ResourceManager.GetObject("minus", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] plus {
             get {
                 object obj = ResourceManager.GetObject("plus", resourceCulture);

@@ -14,15 +14,18 @@ namespace MobileAppRogovski
         WebView webView;
         Entry search;
         ImageButton home, back, forward, favorite, add, delete;
-        StackLayout st, st1;
+        StackLayout st;
         List<string> favoriteList = new List<string>() { "www.tthk.ee/" };
         string urlR;
         public PickerPage()
         {
+            BackgroundColor= Color.LightGray;
             Title = "Picker Page";
             picker = new Picker
             {
                 Title = "AJALUGU",
+                TitleColor = Color.Gray,
+                TextColor = Color.Gray
             };
             picker.SelectedIndexChanged += Picker_SelectedIndexChanged;
             webView = new WebView
@@ -35,7 +38,7 @@ namespace MobileAppRogovski
             {
                 picker.Items.Add(e.Url.Replace("https://", ""));
                 search.TextColor = Color.Gray;
-                search.Text = "Otsing";
+                search.Text = "OTSING";
                 urlR = e.Url.Replace("https://", "");
             };
             search = new Entry
@@ -49,7 +52,7 @@ namespace MobileAppRogovski
             search.Focused += (sender, e) =>
             {
                 search.Text = string.Empty;
-                search.TextColor = Color.White;
+                search.TextColor = Color.Gray;
             };
             search.Unfocused += Search_Unfocused;
             home = new ImageButton
@@ -61,7 +64,7 @@ namespace MobileAppRogovski
             };
             home.Clicked += (sender, e) =>
             {
-                webView.Source = new UrlWebViewSource { Url = "https://www.tthk.ee" };
+                webView.Source = new UrlWebViewSource { Url = "https://www.tthk.ee"};
             };
             back = new ImageButton
             {
@@ -95,23 +98,11 @@ namespace MobileAppRogovski
                 BackgroundColor = Color.Transparent
             };
             add.Clicked += Add_Clicked;
-            delete = new ImageButton
-            {
-                HeightRequest = 25,
-                WidthRequest = 25,
-                Source = ImageSource.FromStream(() => new MemoryStream(Properties.Resources.minus)),
-                BackgroundColor = Color.Transparent
-            };
-            delete.Clicked += Delete_Clicked;
-            st1 = new StackLayout
-            {
-                Orientation = StackOrientation.Vertical,
-                Children = { add, delete },
-            };
+            
             st = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
-                Children = { home, back, forward, new Frame { WidthRequest = 195, BackgroundColor = Color.Transparent }, favorite, st1 },
+                Children = { home, back, forward, new Frame { WidthRequest = 195, BackgroundColor = Color.Transparent }, favorite, add },
             };
             Content = new StackLayout
             {
@@ -137,10 +128,41 @@ namespace MobileAppRogovski
 
         private async void Favorite_Clicked(object sender, EventArgs e)
         {
-            string action = await DisplayActionSheet("Lemmiklehed", "Tühista", null, favoriteList.ToArray());
-            if (action != "Tühista")
+            string action = await DisplayActionSheet("Lemmiklehed", "Lisa", "Kustuta", favoriteList.ToArray());
+            if (action == "Kustuta")
+            {
+                string siteToDelete = await DisplayActionSheet("Kustutamine", "Kaota", null, favoriteList.ToArray());
+                if (siteToDelete != "Kaota")
+                {
+                    favoriteList.Remove(siteToDelete);
+                    await DisplayAlert("Teavitus", "Sa kustutasid lehe", "OK");
+                }
+            }
+            else if (action == "Lisa")
+            {
+                string siteToAdd = await DisplayPromptAsync("Lisamine", "Kirjuta lehe nimi:",accept: "Lisa",cancel: "Kaota", placeholder: "Lehe nimi");
+                if (!string.IsNullOrEmpty(siteToAdd))
+                {
+                    if (!favoriteList.Contains(siteToAdd) && siteToAdd.Contains("."))
+                    {
+                        favoriteList.Add(siteToAdd);
+                        await DisplayAlert("Teavitus", "Sa lisatud lehe", "OK"); 
+                    }
+                    else
+                    {
+                        await DisplayAlert("Teavitus", "Ei saa lisata", "OK");
+                    }
+                    
+                }
+            }
+            else if (action != "Kustuta" && action != "Kaota")
+            {
                 webView.Source = new UrlWebViewSource { Url = "https://" + action };
+            }
         }
+
+    
+
 
         private void Search_Unfocused(object sender, FocusEventArgs e)
         {
