@@ -19,7 +19,7 @@ namespace MobileAppRogovski
         {
             lbl = new Label
             {
-                Text = "...",
+                Text = "....",
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };

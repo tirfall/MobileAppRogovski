@@ -37,9 +37,12 @@ namespace MobileAppRogovski
                 ShowTime();
             }
         }
+        Random rnd;
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             lbl.Text = "Vajutatud";
+            rnd = new Random();
+            BackgroundColor = Color.FromRgb(rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255));
         }
         private async void tagasi_clicked(object sender, EventArgs e)
         {
