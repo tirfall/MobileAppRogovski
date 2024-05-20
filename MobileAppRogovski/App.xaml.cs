@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using Rg.Plugins.Popup;
 using Xamarin.Forms.Xaml;
 
 namespace MobileAppRogovski
@@ -9,7 +10,6 @@ namespace MobileAppRogovski
         public App()
         {
             InitializeComponent();
-
             MainPage = new NavigationPage(new startpage1());
         }
 

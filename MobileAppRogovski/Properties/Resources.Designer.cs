@@ -73,6 +73,26 @@ namespace MobileAppRogovski.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] eesti {
+            get {
+                object obj = ResourceManager.GetObject("eesti", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] email {
+            get {
+                object obj = ResourceManager.GetObject("email", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] forward {
             get {
                 object obj = ResourceManager.GetObject("forward", resourceCulture);
@@ -86,6 +106,16 @@ namespace MobileAppRogovski.Properties {
         internal static byte[] home {
             get {
                 object obj = ResourceManager.GetObject("home", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] leedu {
+            get {
+                object obj = ResourceManager.GetObject("leedu", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -113,9 +143,69 @@ namespace MobileAppRogovski.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] poola {
+            get {
+                object obj = ResourceManager.GetObject("poola", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] rootsi {
+            get {
+                object obj = ResourceManager.GetObject("rootsi", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] sms {
+            get {
+                object obj = ResourceManager.GetObject("sms", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] star {
             get {
                 object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] tel {
+            get {
+                object obj = ResourceManager.GetObject("tel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] white {
+            get {
+                object obj = ResourceManager.GetObject("white", resourceCulture);
                 return ((byte[])(obj));
             }
         }
