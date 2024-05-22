@@ -2,11 +2,38 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileAppRogovski.TripsTrapsTrull">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid x:Name="ttt">
+        <!-- Define rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <!-- Last row, half the size of the previous rows -->
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+
+        <!-- Define columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Your content goes here, using Grid.Row and Grid.Column to specify the position -->
+        <Button Text="" Grid.Row="0" Grid.Column="0" Clicked="bt1" FontSize="100" FontFamily="Arial Black" AutomationId="Button1"/>
+        <Button Text="" Grid.Row="0" Grid.Column="1" Clicked="bt2" FontSize="100" FontFamily="Arial Black" AutomationId="Button2"/>
+        <Button Text="" Grid.Row="0" Grid.Column="2" Clicked="bt3" FontSize="100" FontFamily="Arial Black" AutomationId="Button3"/>
+
+        <Button Text="" Grid.Row="1" Grid.Column="0" Clicked="bt4" FontSize="100" FontFamily="Arial Black" AutomationId="Button4"/>
+        <Button Text="" Grid.Row="1" Grid.Column="1" Clicked="bt5" FontSize="100" FontFamily="Arial Black" AutomationId="Button5"/>
+        <Button Text="" Grid.Row="1" Grid.Column="2" Clicked="bt6" FontSize="100" FontFamily="Arial Black" AutomationId="Button6"/>
+
+        <Button Text="" Grid.Row="2" Grid.Column="0" Clicked="bt7" FontSize="100" FontFamily="Arial Black" AutomationId="Button7"/>
+        <Button Text="" Grid.Row="2" Grid.Column="1" Clicked="bt8" FontSize="100" FontFamily="Arial Black" AutomationId="Button8"/>
+        <Button Text="" Grid.Row="2" Grid.Column="2" Clicked="bt9" FontSize="100" FontFamily="Arial Black" AutomationId="Button9"/>
+
+        <Label Text="testPlayer" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" FontSize="18" FontFamily="YourFontFamily" AutomationId="Label1"/>
+        <Button Text="14" Grid.Row="3" Grid.Column="1" Clicked="OnButtonClicked" VerticalOptions="Start" HorizontalOptions="FillAndExpand" HeightRequest="50" />
+    </Grid>
+
 </ContentPage>
